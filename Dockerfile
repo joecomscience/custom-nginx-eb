@@ -1,5 +1,7 @@
-FROM golang:alpine
+FROM alpine:3.8
+ENV TARGET=""
 
-COPY main.go /go
-RUN go build -o main .
-CMD [ "./main" ]
+COPY goproxy /goproxy
+EXPOSE 80
+RUN echo ${TARGET}
+CMD [ "sh", "-c", "/goproxy -target=${TARGET} -addr=:80" ]
