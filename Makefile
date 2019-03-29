@@ -3,3 +3,6 @@ goproxy:
 
 build:
 	docker build -t joewalker/goproxy .
+
+push:
+	docker push joewalker/goproxy

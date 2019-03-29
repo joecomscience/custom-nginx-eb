@@ -15,6 +15,7 @@ type Proxy struct {
 func (proxy *Proxy) Handler(p *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == proxy.HealthCheck {
+			log.Printf("call health check: %s", proxy.HealthCheck)
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte("Application healthy"))
 			return

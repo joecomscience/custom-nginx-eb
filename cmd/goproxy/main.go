@@ -13,7 +13,7 @@ import (
 func main() {
 	var (
 		target      = flag.String("target", "http://localhost:8081", "destination ")
-		healthCheck = flag.String("healthcheck", "/health", "application health check path")
+		healthCheck = flag.String("healthCheck", "/health", "application health check path")
 		addr        = flag.String("addr", ":8080", "server port")
 	)
 
@@ -32,6 +32,7 @@ func main() {
 	}
 
 	log.Printf("target: %s", *target)
+	log.Printf("application health check path: %s", *healthCheck)
 	log.Printf("server port: %s", *addr)
 
 	http.HandleFunc("/", proxy.Handler(reversProxy))
