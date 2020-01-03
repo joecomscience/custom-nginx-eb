@@ -2,7 +2,7 @@
 
 def pipelineLists = [
   [
-    repository: 'root/spring-boot',
+    repository: 'joecomscience/spring-boot-demo',
     jobfolder: 'aycap',
     jobname: 'default',
     template: 'Jenkinsfile',
