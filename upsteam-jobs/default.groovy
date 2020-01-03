@@ -71,7 +71,7 @@ node() {
         userRemoteConfigs: [
           [
             credentialsId: 'github_credential',
-            url: '$gitBaseUrl/$repository' + '.git'
+            url: '$gitBaseUrl$repository' + '.git'
           ]
         ]
       ]
