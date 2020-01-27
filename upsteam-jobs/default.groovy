@@ -2,7 +2,7 @@
 
 @Library('pipeline-library') _
 
-node() {
+node(label: 'docker') {
   stage('Refetch Script') {
     // abortRunningBuild()
     // document
