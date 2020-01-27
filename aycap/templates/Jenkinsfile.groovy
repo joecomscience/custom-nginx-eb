@@ -7,6 +7,11 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
       println("joewalker ${commitId}-${authorName}")
     }
 
+    stage('Check quality') {
+      sh """
+        sonar-scanner
+      """
+    }
     stage('Unit Test') {}
     stage('Integration Test') {}
     stage('E2E Test') {}
