@@ -9,7 +9,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
 
     stage('Check quality') {
       sh """
-        sonar-scanner
+        sonar-scanner -Dsonar.projectKey=spring-boot-demo -Dsonar.sources=src -Dproject.settings=./src/sonar.properties
       """
     }
     stage('Unit Test') {}
