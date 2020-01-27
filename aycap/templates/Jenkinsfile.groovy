@@ -9,7 +9,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
 
     stage('Check quality') {
       sh """
-        /home/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=spring-boot-demo -Dsonar.sources=src -Dproject.settings=./src/sonar.properties
+        /home/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=spring-boot-demo -Dsonar.sources=src -Dproject.settings=./src/sonar.properties -Dsonar.host.url=http://host.docker.internal:9000
       """
     }
     stage('Unit Test') {}
