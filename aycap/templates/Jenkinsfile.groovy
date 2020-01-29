@@ -28,7 +28,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     stage('Deploy') {}
   }
 
-  def jobDir = new File(getClass().protectionDomain.codeSource.location.path).parent
+  def jobDir = sh(script: "pwd", returnStdout: true).trim()
   publishHTML([
     allowMissing: false,
     alwaysLinkToLastBuild: true,
