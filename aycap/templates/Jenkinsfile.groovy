@@ -26,17 +26,16 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     stage('E2E Test') {}
     stage('Build & Push Image') {}
     stage('Deploy') {}
-  }
 
-  def jobDir = sh(script: "pwd", returnStdout: true).trim()
-  publishHTML([
-    allowMissing: false,
-    alwaysLinkToLastBuild: true,
-    keepAll: true,
-    reportDir: "/home/jenkins/workspace/aycap/default/src",
-    reportFiles: 'dependency-check-report.html',
-    reportName: 'dependency check report',
-    reportTitles: ''])
+    publishHTML([
+      allowMissing: false,
+      alwaysLinkToLastBuild: true,
+      keepAll: true,
+      reportDir: "./",
+      reportFiles: 'dependency-check-report.html',
+      reportName: 'dependency check report',
+      reportTitles: ''])
+    }
 }
 
 return this;
