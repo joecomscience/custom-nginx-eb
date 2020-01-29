@@ -32,7 +32,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     allowMissing: false,
     alwaysLinkToLastBuild: true,
     keepAll: true,
-    reportDir: '',
+    reportDir: "${pwd}",
     reportFiles: 'dependency-check-report.html',
     reportName: 'dependency check report',
     reportTitles: ''])
