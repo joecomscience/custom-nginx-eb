@@ -27,6 +27,14 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     stage('Build & Push Image') {}
     stage('Deploy') {}
   }
+
+  publishHTML (target: [
+    allowMissing: false,
+    alwaysLinkToLastBuild: false,
+    keepAll: true,
+    reportFiles: 'dependency-check-report.html',
+    reportName: "Dependency Check Report"
+  ])
 }
 
 return this;
