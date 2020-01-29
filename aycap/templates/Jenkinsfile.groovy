@@ -28,13 +28,14 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     stage('Deploy') {}
   }
 
-  publishHTML (target: [
+  publishHTML([
     allowMissing: false,
-    alwaysLinkToLastBuild: false,
+    alwaysLinkToLastBuild: true,
     keepAll: true,
+    reportDir: '',
     reportFiles: 'dependency-check-report.html',
-    reportName: "Dependency Check Report"
-  ])
+    reportName: 'dependency check report',
+    reportTitles: ''])
 }
 
 return this;
