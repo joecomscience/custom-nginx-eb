@@ -10,7 +10,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
 
     stage('Check quality') {
       sh """
-        /home/dependency-check/bin \
+        /home/dependency-check/bin/dependency-check.sh \
         --project 'spring-boot-demo' \
         --scan './src/main/kotlin'
       """
