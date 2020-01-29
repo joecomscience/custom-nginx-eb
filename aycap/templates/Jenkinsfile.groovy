@@ -32,7 +32,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
     allowMissing: false,
     alwaysLinkToLastBuild: true,
     keepAll: true,
-    reportDir: "${pwd}",
+    reportDir: "/home/jenkins/workspace/aycap/default/src",
     reportFiles: 'dependency-check-report.html',
     reportName: 'dependency check report',
     reportTitles: ''])
