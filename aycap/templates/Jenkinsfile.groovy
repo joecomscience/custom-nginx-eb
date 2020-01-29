@@ -10,11 +10,16 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
 
     stage('Check quality') {
       sh """
-        /home/sonar-scanner/bin/sonar-scanner \
-        -Dsonar.projectKey=spring-boot-demo \
-        -Dsonar.sources=src/main/kotlin \
-        -Dsonar.host.url=http://host.docker.internal:9000
+        /home/dependency-check/bin \
+        --project 'spring-boot-demo' \
+        --scan './src/main/kotlin'
       """
+      // sh """
+      //   /home/sonar-scanner/bin/sonar-scanner \
+      //   -Dsonar.projectKey=spring-boot-demo \
+      //   -Dsonar.sources=src/main/kotlin \
+      //   -Dsonar.host.url=http://host.docker.internal:9000
+      // """
     }
     stage('Unit Test') {}
     stage('Integration Test') {}
