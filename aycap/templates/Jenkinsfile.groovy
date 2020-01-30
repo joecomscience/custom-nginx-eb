@@ -33,7 +33,7 @@ def defaultPipeline(region=null, awsProfile=null, applicationId=null) {
       keepAll: true,
       reportDir: "./",
       reportFiles: 'dependency-check-report.html',
-      reportName: 'dependency check report',
+      reportName: 'Dependency Check Report',
       reportTitles: ''])
     }
 }
