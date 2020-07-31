@@ -37,10 +37,10 @@ def pipelineLists = [
     pipelineJob("${jobfolder}/${jobname}") {
         description "Pipeline for ${jobname}"
         disabled(false)
-        concurrentBuild(false)
         logRotator(-1, 5)
 
         properties {
+            disableConcurrentBuilds()
             githubProjectUrl("${GIT_HOST_NAME}/${repository}.git")
         }
 
