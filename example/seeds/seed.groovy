@@ -41,7 +41,7 @@ def pipelineLists = [
 
         properties {
             disableConcurrentBuilds()
-            githubProjectUrl("${GIT_HOST_NAME}/${repository}.git")
+            githubProjectUrl("${GIT_HOST_NAME}/${projectRepo}.git")
         }
 
         triggers {
