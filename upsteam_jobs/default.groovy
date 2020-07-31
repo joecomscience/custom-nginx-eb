@@ -31,7 +31,7 @@ node(label: 'docker') {
                         userRemoteConfigs                : [
                                 [
                                         credentialsId: 'github_credential',
-                                        url          : '$gitHostName/$repository' + ('.git' as java.lang.CharSequence)
+                                        url          : '$gitHostName/$jenkinsConfigRepo' + ('.git' as java.lang.CharSequence)
                                 ]
                         ]
                 ]
@@ -67,7 +67,7 @@ node(label: 'docker') {
                           userRemoteConfigs                : [
                                   [
                                           credentialsId: 'github_credential',
-                                          url          : '$gitHostName$repository' + '.git'
+                                          url          : '$gitHostName$projectRepo' + '.git'
                                   ]
                           ]
                 ]
