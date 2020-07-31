@@ -41,7 +41,7 @@ def pipelineLists = [
         logRotator(-1, 5)
 
         properties {
-            githubProjectUrl("${GIT_BASE_URL}/${repository}.git")
+            githubProjectUrl("${GIT_HOST_NAME}/${repository}.git")
         }
 
         triggers {
