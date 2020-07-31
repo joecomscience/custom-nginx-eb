@@ -1,39 +1,39 @@
 #!/usr/bin/env groovy
 
 def entities = [
-  [
-    name: 'aycap'
-  ]
+        [
+                name: 'example'
+        ]
 ].each { item ->
 
-  entity = item['name']
+    entity = item['name']
 
-  def jobname = 'seed_job'
+    def jobname = 'seed_job'
 
-  folder("${entity}")
-  job("${entity}/${jobname}") {
-    label('master-node')
-    description "Seed Job for ${entity}"
-    disabled(false)
-    concurrentBuild(false)
-    logRotator(-1, 5)
+    folder("${entity}")
+    job("${entity}/${jobname}") {
+        label('master-node')
+        description "Seed Job for ${entity}"
+        disabled(false)
+        concurrentBuild(false)
+        logRotator(-1, 5)
 
-    scm {
-      git {
-        remote {
-          url("${GIT_PIPELINE_REPO}")
-          credentials('github_credential')
+        scm {
+            git {
+                remote {
+                    url("${GIT_HOST_NAME}/${JENKINS_CONFIGURATION_REPO}")
+                    credentials('git_credential')
+                }
+                branch('master')
+            }
         }
-        branch('master')
-      }
-    }
 
-    steps {
-      jobDsl {
-        targets("${entity}/seeds/*.groovy")
-        sandbox(false)
-        ignoreExisting(false)
-      }
+        steps {
+            jobDsl {
+                targets("${entity}/seeds/*.groovy")
+                sandbox(false)
+                ignoreExisting(false)
+            }
+        }
     }
-  }
 }

@@ -1,0 +1,54 @@
+#!/usr/bin/env groovy
+import groovy.text.SimpleTemplateEngine
+
+def pipelineLists = [
+        [
+                repository: 'joecomscience/spring-boot-demo',
+                jobfolder : 'example',
+                jobname   : 'default',
+                template  : 'Jenkinsfile',
+        ]
+].each { item ->
+    def projectRepo = item['repository']
+    def jobfolder = item['jobfolder']
+    def jobname = item['jobname']
+    def branch = item.containsKey('branch') ? item['branch'].toLowerCase() : 'master'
+    def jobTemplateFile = item.containsKey('template') ? item['template'] : 'Jenkinsfile'
+
+    def upSteamJobScriptFileLocation = "${JENKINS_HOME}/workspace/${jobfolder}/seed_job/upsteam-jobs/default.groovy"
+    def templateEngine = new SimpleTemplateEngine()
+    def upSteamJobScript = new File(upSteamJobScriptFileLocation).text.stripIndent().trim()
+    def dataBindingToTemplate = [
+            "jenkinsConfigRepo": "${JENKINS_CONFIGURATION_REPO}",
+            "gitHostName"      : "${GIT_HOST_NAME}",
+            "branch"           : "${branch}",
+            "projectRepo"      : "${projectRepo}",
+            "template"         : "jenkinsfile/${jobfolder}/templates/${jobTemplateFile}.groovy",
+    ]
+    def pipelineScript = templateEngine
+            .createTemplate(upSteamJobScript)
+            .make(dataBindingToTemplate)
+
+    folder("${jobfolder}")
+    pipelineJob("${jobfolder}/${jobname}") {
+        description "Pipeline for ${jobname}"
+        disabled(false)
+        concurrentBuild(false)
+        logRotator(-1, 5)
+
+        properties {
+            githubProjectUrl("${GIT_BASE_URL}/${repository}.git")
+        }
+
+        triggers {
+            githubPush()
+        }
+
+        definition {
+            cps {
+                sandbox(true)
+                script(pipelineScript.toString())
+            }
+        }
+    }
+}

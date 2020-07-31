@@ -3,81 +3,77 @@
 @Library('pipeline-library') _
 
 node(label: 'docker') {
-  stage('Refetch Script') {
-    // abortRunningBuild()
-    // document
-    // https://support.cloudbees.com/hc/en-us/articles/226122247-How-to-Customize-Checkout-for-Pipeline-Multibranch-
-    checkout([
-      changelog: false,
-      poll: false,
-      scm: [
-        \$class: 'GitSCM',
-        branches: [
-          [
-            name: '*/master'
-          ]
-        ],
-        doGenerateSubmoduleConfigurations: false,
-        extensions: [
-          [
-            \$class: 'RelativeTargetDirectory',
-            relativeTargetDir: 'jenkinsfile'
-          ],
-          [
-            \$class: 'IgnoreNotifyCommit'
-          ],
-          [
-            \$class: 'WipeWorkspace'
-          ]
-        ],
-        submoduleCfg: [],
-        userRemoteConfigs: [
-          [
-            credentialsId: 'github_credential',
-            url: '$pipeLineRepo'
-          ]
-        ]
-      ]
-    ]);
-    // build(job: '$seedJob');
-  }
+    stage('Refetch Script') {
+        checkout([
+                changelog: false,
+                poll     : false,
+                scm      : [
+                        '\$class'                        : 'GitSCM',
+                        branches                         : [
+                                [
+                                        name: '*/master'
+                                ]
+                        ],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions                       : [
+                                [
+                                        '\$class'        : 'RelativeTargetDirectory',
+                                        relativeTargetDir: 'jenkinsfile'
+                                ],
+                                [
+                                        '\$class': 'IgnoreNotifyCommit'
+                                ],
+                                [
+                                        '\$class': 'WipeWorkspace'
+                                ]
+                        ],
+                        submoduleCfg                     : [],
+                        userRemoteConfigs                : [
+                                [
+                                        credentialsId: 'github_credential',
+                                        url          : '$gitHostName/$repository' + ('.git' as java.lang.CharSequence)
+                                ]
+                        ]
+                ]
+        ]);
+    }
 
-  stage('Checkout Source Code') {
-    checkout([
-      changelog: true,
-      scm: [
-        \$class: 'GitSCM',
-        branches: [
-          [
-            name: '*/$branch'
-          ]
-        ],
-        doGenerateSubmoduleConfigurations: false,
-        extensions: [
-          [
-            // set timeout when clone huge repo
-            \$class: 'CloneOption', 
-            timeout: 60
-          ],
-          [
-            \$class: 'RelativeTargetDirectory',
-            relativeTargetDir: 'src'
-          ],
-          [
-            \$class: 'WipeWorkspace'
-          ]
-        ],
-        submoduleCfg: [],
-        userRemoteConfigs: [
-          [
-            credentialsId: 'github_credential',
-            url: '$gitBaseUrl$repository' + '.git'
-          ]
-        ]
-      ]
-    ]);
-  }
+    stage('Checkout Source Code') {
+        checkout([
+                changelog: true,
+                scm      : [
+                        '\$class'                          : 'GitSCM',
+                          branches                         : [
+                                  [
+                                          name: '*/$branch'
+                                  ]
+                          ],
+                          doGenerateSubmoduleConfigurations: false,
+                          extensions                       : [
+                                  [
+                                          // set timeout when clone huge repo
+                                          '\$class' : 'CloneOption',
+                                            timeout: 60
+                                  ],
+                                  [
+                                          '\$class'           : 'RelativeTargetDirectory',
+                                            relativeTargetDir: 'src'
+                                  ],
+                                  [
+                                          '\$class': 'WipeWorkspace'
+                                  ]
+                          ],
+                          submoduleCfg                     : [],
+                          userRemoteConfigs                : [
+                                  [
+                                          credentialsId: 'github_credential',
+                                          url          : '$gitHostName$repository' + '.git'
+                                  ]
+                          ]
+                ]
+        ]);
+    }
 
-  def jf = load('$template');
-  jf.defaultPipeline();
+    def jf = load('$template');
+    jf.defaultPipeline();
 }

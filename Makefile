@@ -1,10 +1,10 @@
-run:
+jenkins:
 	docker run \
-  --rm \
-  -p 8080:8080 \
-  -p 50000:50000 \
+	--rm \
+	-p 8080:8080 \
+	-p 50000:50000 \
 	-v ${PWD}/jenkins_home:/var/jenkins_home \
-  jenkinsci/blueocean
+	jenkins/jenkins:lts
 
 commit:
 	git add .
