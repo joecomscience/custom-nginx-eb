@@ -2,7 +2,7 @@
 
 @Library('pipeline-library') _
 
-node(label: 'docker') {
+node() {
     stage('Refetch Script') {
         checkout([
                 changelog: false,
