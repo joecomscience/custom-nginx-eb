@@ -10,7 +10,6 @@ def entities = [
 
     folder("${entity}")
     job("${entity}/seed_job") {
-        label('master-node')
         description "Seed Job for ${entity}"
         disabled(false)
         concurrentBuild(false)
