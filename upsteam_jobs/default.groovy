@@ -75,5 +75,5 @@ node(label: 'docker') {
     }
 
     def jf = load('$template');
-    jf.defaultPipeline();
+    jf.defaultPipeline('$jobname');
 }

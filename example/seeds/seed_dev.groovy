@@ -5,7 +5,7 @@ def pipelineLists = [
         [
                 repository: 'joecomscience/spring-boot-demo',
                 jobfolder : 'example',
-                jobname   : 'default',
+                jobname   : 'spring-boot-demo',
                 template  : 'Jenkinsfile',
         ]
 ].each { item ->
@@ -15,14 +15,18 @@ def pipelineLists = [
     def branch = item.containsKey('branch') ? item['branch'].toLowerCase() : 'master'
     def jobTemplateFile = item.containsKey('template') ? item['template'] : 'Jenkinsfile'
 
-    def upSteamJobScriptFileLocation = "${JENKINS_HOME}/workspace/${jobfolder}/seed_job/upsteam-jobs/default.groovy"
+    def upSteamJobScriptFileLocation = "${JENKINS_HOME}/workspace/${jobfolder}/seed_job/upsteam_jobs/default.groovy"
     def templateEngine = new SimpleTemplateEngine()
-    def upSteamJobScript = new File(upSteamJobScriptFileLocation).text.stripIndent().trim()
+    def upSteamJobScript = new File(upSteamJobScriptFileLocation)
+            .text
+            .stripIndent()
+            .trim()
     def dataBindingToTemplate = [
             "jenkinsConfigRepo": "${JENKINS_CONFIGURATION_REPO}",
             "gitHostName"      : "${GIT_HOST_NAME}",
             "branch"           : "${branch}",
             "projectRepo"      : "${projectRepo}",
+            "jobname"          : "${jobname}",
             "template"         : "jenkinsfile/${jobfolder}/templates/${jobTemplateFile}.groovy",
     ]
     def pipelineScript = templateEngine

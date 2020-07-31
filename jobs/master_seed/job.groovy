@@ -8,10 +8,8 @@ def entities = [
 
     entity = item['name']
 
-    def jobname = 'seed_job'
-
     folder("${entity}")
-    job("${entity}/${jobname}") {
+    job("${entity}/seed_job") {
         label('master-node')
         description "Seed Job for ${entity}"
         disabled(false)
