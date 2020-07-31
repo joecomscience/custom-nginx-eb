@@ -4,19 +4,19 @@ def defaultPipeline(jobname = null) {
         def authorName = sh(script: "git --no-pager show -s --format='%an' HEAD", returnStdout: true).trim()
 
         stage('Install Dependencies') {
-            Maven.InstallDependency()
+            maven.InstallDependency()
         }
         stage('Check quality') {
             def projectKey = jobname
             def projectName = jobname
 
-            Maven.SonarScan(
+            maven.SonarScan(
                     "${projectKey}",
                     "${projectName}",
             )
         }
         stage('Build') {
-            Maven.Build()
+            maven.Build()
         }
     }
 }
