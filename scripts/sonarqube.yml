@@ -13,9 +13,9 @@ services:
       SONAR_JDBC_USERNAME: sonar
       SONAR_JDBC_PASSWORD: sonar
 
-    postgres:
-      image: postgres:alpine
-      container_name: postgres_db
-      environment:
-        POSTGRES_USER: sonar
-        POSTGRES_PASSWORD: sonar
+  postgres:
+    image: postgres:alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
