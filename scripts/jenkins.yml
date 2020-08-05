@@ -1,16 +1,12 @@
-version: '3.7'
+version: "3.7"
 services:
   jenkins:
     build:
-        context: ./scripts/jenkins/.
+      context: ./jenkins/.
     container_name: jenkins_master
+    networks:
+      - default
     ports:
       - "8080:8080"
     volumes:
       - $PWD/jenkins_home:/var/jenkins_home
-
-  sonarqube:
-    image: sonarqube:lts
-    container_name: sonarqube
-    ports:
-      - "9000:9000"
