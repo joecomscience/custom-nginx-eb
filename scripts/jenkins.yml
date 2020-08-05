@@ -4,8 +4,6 @@ services:
     build:
       context: ./jenkins/.
     container_name: jenkins_master
-    networks:
-      - default
     ports:
       - "8080:8080"
     volumes:
