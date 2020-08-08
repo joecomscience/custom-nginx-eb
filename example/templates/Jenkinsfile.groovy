@@ -11,8 +11,8 @@ def defaultPipeline(jobname = null) {
             def projectName = jobname
 
             sonar.Scan(
-                    projectKey: "${projectKey}",
-                    projectName: "${projectName}",
+                    "${projectKey}",
+                    "${projectName}",
             )
         }
         stage('Build') {
