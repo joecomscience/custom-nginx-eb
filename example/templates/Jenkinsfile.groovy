@@ -9,14 +9,18 @@ def defaultPipeline(jobname = null) {
         stage('Check quality') {
             def projectKey = jobname
             def projectName = jobname
-
             sonar.Scan(
-                    "${projectKey}",
-                    "${projectName}",
+                    projectKey,
+                    projectName,
             )
         }
-        stage('Build') {
-            maven.Build()
+        stage('DependencyCheck') {
+            def project = jobname
+            def projectPath = sh(script: "pwd", returnStdout: true).trim()
+            owasp.DependencyCheck(
+                    project,
+                    projectPath,
+            )
         }
     }
 }
