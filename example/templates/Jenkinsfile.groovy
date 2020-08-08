@@ -10,9 +10,9 @@ def defaultPipeline(jobname = null) {
             def projectKey = jobname
             def projectName = jobname
 
-            maven.SonarScan(
-                    "${projectKey}",
-                    "${projectName}",
+            sonar.Scan(
+                    projectKey: "${projectKey}",
+                    projectName: "${projectName}",
             )
         }
         stage('Build') {
@@ -21,4 +21,4 @@ def defaultPipeline(jobname = null) {
     }
 }
 
-return this;
+return this

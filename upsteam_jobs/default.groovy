@@ -35,7 +35,7 @@ node() {
                                 ]
                         ]
                 ]
-        ]);
+        ])
     }
 
     stage('Checkout Source Code') {
@@ -71,9 +71,9 @@ node() {
                                   ]
                           ]
                 ]
-        ]);
+        ])
     }
 
-    def jf = load('$template');
-    jf.defaultPipeline('$jobname');
+    def jf = load('$template')
+    jf.defaultPipeline('$jobname')
 }
