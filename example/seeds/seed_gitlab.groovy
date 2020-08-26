@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-import com.pipeline.*
+import com.pipeline.DefaultTemplateHelper
 
 def pipelineLists = [
         [
