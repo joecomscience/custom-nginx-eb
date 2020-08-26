@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
-@Library('pipeline-library') _
-import com.joewalker.pipeline.github.*
+import com.pipeline.*
 
 def pipelineLists = [
         [
