@@ -6,7 +6,8 @@ def defaultPipeline(jobname = null) {
         stage('Install Dependencies') {
             maven.InstallDependency()
         }
-        stage('Check quality') {
+
+        stage('SonarScanner') {
             def projectKey = jobname
             def projectName = jobname
             sonar.Scan(
@@ -14,6 +15,7 @@ def defaultPipeline(jobname = null) {
                     projectName,
             )
         }
+
         stage('DependencyCheck') {
             def project = jobname
             def projectPath = sh(script: "pwd", returnStdout: true).trim()
